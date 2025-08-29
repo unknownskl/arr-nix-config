@@ -6,7 +6,7 @@
   outputs = { self, nixpkgs }:
     {
       nixosConfigurations = {
-        server1 = nixpkgs.lib.nixosSystem {
+        nixarr = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";  # adjust if using ARM (aarch64-linux)
           modules = [
             ./hosts/common.nix

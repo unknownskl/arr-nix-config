@@ -48,4 +48,4 @@ To get console access working, follow the steps here: https://nixos.wiki/wiki/Pr
 
 ### 4. Install flake
 
-sudo nixos-rebuild switch --flake github:unknownskl/arr-nix-config#nixarr
+sudo nixos-rebuild switch --flake github:unknownskl/arr-nix-config#nixarr --no-write-lock-file
