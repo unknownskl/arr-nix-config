@@ -61,9 +61,6 @@
     };
   };
 
-  # Enable cgroups v2 for better container performance
-  systemd.enableUnifiedCgroupHierarchy = true;
-
   # Configure user namespaces for rootless containers
   users.users.media = {
     subUidRanges = [
