@@ -2,22 +2,23 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Create sonarr directories
-  systemd.tmpfiles.rules = [
-    "d /var/lib/sonarr 0755 media media -"
-    "d /var/lib/sonarr/config 0755 media media -"
-    "d /downloads 0755 media media -"
-    "d /downloads/tv 0755 media media -"
-  ];
+  config = lib.mkIf config.services.arr-stack.sonarr.enable {
+    # Create sonarr directories
+    systemd.tmpfiles.rules = [
+      "d /var/lib/sonarr 0755 media media -"
+      "d /var/lib/sonarr/config 0755 media media -"
+      "d /downloads 0755 media media -"
+      "d /downloads/tv 0755 media media -"
+    ];
 
-  # Sonarr container service
-  systemd.services.sonarr = {
-    description = "Sonarr TV Show Manager";
-    after = [ "network.target" "podman.service" ];
-    wants = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    
-    serviceConfig = {
+    # Sonarr container service
+    systemd.services.sonarr = {
+      description = "Sonarr TV Show Manager";
+      after = [ "network.target" "podman.service" ];
+      wants = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
+      
+      serviceConfig = {
       Type = "forking";
       User = "media";
       Group = "media";
@@ -52,6 +53,7 @@
     };
   };
 
-  # Firewall for Sonarr
-  networking.firewall.allowedTCPPorts = [ 8989 ];
+    # Firewall for Sonarr
+    networking.firewall.allowedTCPPorts = [ 8989 ];
+  };
 }

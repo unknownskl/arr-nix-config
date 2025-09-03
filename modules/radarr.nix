@@ -2,22 +2,23 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Create radarr directories
-  systemd.tmpfiles.rules = [
-    "d /var/lib/radarr 0755 media media -"
-    "d /var/lib/radarr/config 0755 media media -"
-    "d /downloads/movies 0755 media media -"
-  ];
+  config = lib.mkIf config.services.arr-stack.radarr.enable {
+    # Create radarr directories
+    systemd.tmpfiles.rules = [
+      "d /var/lib/radarr 0755 media media -"
+      "d /var/lib/radarr/config 0755 media media -"
+      "d /downloads/movies 0755 media media -"
+    ];
 
-  # Radarr container service
-  systemd.services.radarr = {
-    description = "Radarr Movie Manager";
-    after = [ "network.target" "podman.service" ];
-    wants = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    
-    serviceConfig = {
-      Type = "forking";
+    # Radarr container service
+    systemd.services.radarr = {
+      description = "Radarr Movie Manager";
+      after = [ "network.target" "podman.service" ];
+      wants = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
+      
+      serviceConfig = {
+        Type = "forking";
       User = "media";
       Group = "media";
       ExecStartPre = [
@@ -51,6 +52,7 @@
     };
   };
 
-  # Firewall for Radarr
-  networking.firewall.allowedTCPPorts = [ 7878 ];
+    # Firewall for Radarr
+    networking.firewall.allowedTCPPorts = [ 7878 ];
+  };
 }

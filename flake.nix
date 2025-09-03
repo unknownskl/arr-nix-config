@@ -13,10 +13,9 @@
         ./modules/base.nix
         ./modules/podman.nix
         ./modules/plex.nix
-        # Optional modules (can be enabled via options)
-        (lib.mkIf config.services.arr-stack.sonarr.enable ./modules/sonarr.nix)
-        (lib.mkIf config.services.arr-stack.radarr.enable ./modules/radarr.nix)
-        (lib.mkIf config.services.arr-stack.prowlarr.enable ./modules/prowlarr.nix)
+        ./modules/sonarr.nix
+        ./modules/radarr.nix
+        ./modules/prowlarr.nix
       ];
 
       options.services.arr-stack = {
@@ -82,9 +81,8 @@
             allowedTCPPorts = [ 
               22    # SSH
               32400 # Plex
-            ] ++ lib.optionals config.services.arr-stack.sonarr.enable [ 8989 ]
-              ++ lib.optionals config.services.arr-stack.radarr.enable [ 7878 ]
-              ++ lib.optionals config.services.arr-stack.prowlarr.enable [ 9696 ];
+              # Other service ports are handled by their respective modules
+            ];
           };
         };
 
