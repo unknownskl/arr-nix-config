@@ -80,6 +80,15 @@
           where = "/sys/kernel/debug";
           enable = false;
         }];
+
+        # Enable SSH for remote management
+        services.openssh = {
+          enable = true;
+          settings = {
+            PasswordAuthentication = false;
+            PermitRootLogin = "no";
+          };
+        };
       };
     };
 
