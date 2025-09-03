@@ -27,6 +27,7 @@
   # Add shadow utilities to system packages (required for newuidmap/newgidmap)
   environment.systemPackages = with pkgs; [
     shadow
+    crun
     util-linux  # Also provides useful container utilities
   ];
 
