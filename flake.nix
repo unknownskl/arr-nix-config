@@ -57,7 +57,27 @@
         };
       };
 
-      # Standalone configuration for direct deployment (backward compatibility)
+      config = lib.mkIf config.services.arr-stack.enable {
+        # System configuration
+        system.stateVersion = lib.mkDefault "24.05";
+        
+        # Allow unfree packages (needed for Plex)
+        nixpkgs.config.allowUnfree = true;
+
+        # Set timezone
+        time.timeZone = config.services.arr-stack.timezone;
+
+        # User configuration with SSH keys from options
+        users.users.media = {
+          isNormalUser = true;
+          description = "Media Services User";
+          extraGroups = [ "wheel" "podman" ];
+          openssh.authorizedKeys.keys = config.services.arr-stack.sshKeys;
+        };
+      };
+    };
+
+    # Standalone configuration for direct deployment (backward compatibility)
     nixosConfigurations.arr-server = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
