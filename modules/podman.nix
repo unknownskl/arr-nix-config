@@ -21,6 +21,7 @@
       # Container runtime optimizations
       crun  # Faster than runc
       conmon
+      shadow
     ];
   };
 
