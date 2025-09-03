@@ -78,11 +78,7 @@
       systemd-udevd.enable = false;
     };
 
-    mounts = {
-        "sys-kernel-debug" = {
-            enable = false;
-        };
-    };
+    services."sys-kernel-debug.mount".enable = false;
 
     tmpfiles = {
         rules = [
