@@ -76,8 +76,10 @@
         };
 
         # Disable Kernel DebugFS
-        systemd.services."sys-kernel-debug.mount".enable = false;
-
+        systemd.mounts = [{
+          where = "/sys/kernel/debug";
+          enable = false;
+        }];
       };
     };
 
