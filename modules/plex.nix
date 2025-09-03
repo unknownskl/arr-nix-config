@@ -43,7 +43,7 @@
           --name plex \
           --restart unless-stopped \
           --network host \
-          --userns keep-id \
+          --user $(id -u):$(id -g) \
           -e TZ=UTC \
           -e PLEX_CLAIM="" \
           -e ADVERTISE_IP="http://$(hostname -I | awk '{print $1}'):32400/" \
