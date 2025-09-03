@@ -21,9 +21,14 @@
       # Container runtime optimizations
       crun  # Faster than runc
       conmon
-      shadow
     ];
   };
+
+  # Add shadow utilities to system packages (required for newuidmap/newgidmap)
+  environment.systemPackages = with pkgs; [
+    shadow
+    util-linux  # Also provides useful container utilities
+  ];
 
   # Enable container registry access
   virtualisation.containers = {
