@@ -84,31 +84,6 @@
     ];
   };
 
-  # Container engine configuration
-  containersConf.settings = {
-    containers = {
-      default_capabilities = [
-        "CHOWN"
-        "DAC_OVERRIDE" 
-        "FOWNER"
-        "FSETID"
-        "KILL"
-        "NET_BIND_SERVICE"
-        "SETFCAP"
-        "SETGID"
-        "SETPCAP"
-        "SETUID"
-        "SYS_CHROOT"
-      ];
-    };
-    engine = {
-      # Set crun as default runtime
-      runtime = "crun";
-      # Add crun to runtimes list
-      runtimes.crun = [ "${pkgs.crun}/bin/crun" ];
-    };
-  };
-
   # Systemd service for container health monitoring
   systemd.services.container-health-check = {
     description = "Monitor container health";
