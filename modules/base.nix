@@ -76,6 +76,7 @@
       # Disable unnecessary services for containers
       systemd-udev-trigger.enable = false;
       systemd-udevd.enable = false;
+      sys-kernel-debug.enable = false
     };
 
     tmpfiles = {
@@ -83,12 +84,6 @@
           "d /sys/kernel/debug 0555 root root -"
         ];
     }
-
-    suppressedSystemUnits = [
-      "systemd-udev-trigger.service"
-      "systemd-udevd.service"
-      "sys-kernel-debug.mount"
-    ];
   };
 
   # Performance and resource management
