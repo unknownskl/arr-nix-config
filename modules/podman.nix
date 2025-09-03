@@ -28,6 +28,12 @@
   # Enable container registry access
   virtualisation.containers = {
     enable = true;
+
+    # OCI Runtime configuration
+    oci-runtimes.crun = {
+      enable = true;
+      package = pkgs.crun;
+    };
     
     # Registry configuration
     registries = {
@@ -76,6 +82,31 @@
         count = 65536;
       }
     ];
+  };
+
+  # Container engine configuration
+  containersConf.settings = {
+    containers = {
+      default_capabilities = [
+        "CHOWN"
+        "DAC_OVERRIDE" 
+        "FOWNER"
+        "FSETID"
+        "KILL"
+        "NET_BIND_SERVICE"
+        "SETFCAP"
+        "SETGID"
+        "SETPCAP"
+        "SETUID"
+        "SYS_CHROOT"
+      ];
+    };
+    engine = {
+      # Set crun as default runtime
+      runtime = "crun";
+      # Add crun to runtimes list
+      runtimes.crun = [ "${pkgs.crun}/bin/crun" ];
+    };
   };
 
   # Systemd service for container health monitoring
