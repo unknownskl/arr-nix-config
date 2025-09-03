@@ -39,8 +39,6 @@
           --name plex \
           --restart unless-stopped \
           --network host \
-          -e PLEX_UID=1000 \
-          -e PLEX_GID=1000 \
           -e TZ=UTC \
           -e PLEX_CLAIM="" \
           -e ADVERTISE_IP="http://$(hostname -I | awk '{print $1}'):32400/" \
@@ -62,7 +60,7 @@
       RestartSec = "10s";
       
       # Resource limits
-      MemoryLimit = "2G";
+      MemoryMax = "2G";
       CPUQuota = "200%";
     };
     
