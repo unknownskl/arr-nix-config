@@ -74,6 +74,11 @@
           extraGroups = [ "wheel" "podman" ];
           openssh.authorizedKeys.keys = config.services.arr-stack.sshKeys;
         };
+        # Explicitly create media group
+        users.groups.media = {};
+
+        # Ensure media user is in media group
+        users.users.media.group = "media";
 
         # Disable Kernel DebugFS
         systemd.mounts = [{
