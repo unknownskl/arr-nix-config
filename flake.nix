@@ -74,6 +74,10 @@
           extraGroups = [ "wheel" "podman" ];
           openssh.authorizedKeys.keys = config.services.arr-stack.sshKeys;
         };
+
+        # Disable Kernel DebugFS
+        systemd.services."sys-kernel-debug.mount".enable = false;
+
       };
     };
 
