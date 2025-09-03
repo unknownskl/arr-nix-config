@@ -28,12 +28,6 @@
   # Enable container registry access
   virtualisation.containers = {
     enable = true;
-
-    # OCI Runtime configuration
-    oci-runtimes.crun = {
-      enable = true;
-      package = pkgs.crun;
-    };
     
     # Registry configuration
     registries = {
