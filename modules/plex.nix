@@ -2,11 +2,12 @@
 { config, pkgs, lib, ... }:
 
 {
-  # Create media directories
+  # Create media directories and backup directory
   systemd.tmpfiles.rules = [
     "d /var/lib/plex 0755 media media -"
     "d /var/lib/plex/config 0755 media media -"
     "d /var/lib/plex/transcode 0755 media media -"
+    "d /var/lib/plex/backups 0755 media media -"
     "d /media 0755 media media -"
     "d /media/movies 0755 media media -"
     "d /media/tv 0755 media media -"
@@ -118,9 +119,4 @@
     # Run daily at 2 AM
     startAt = "02:00";
   };
-
-  # Create backup directory
-  systemd.tmpfiles.rules = [
-    "d /var/lib/plex/backups 0755 media media -"
-  ];
 }
