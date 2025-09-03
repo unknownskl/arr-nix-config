@@ -9,9 +9,9 @@
     # NixOS module that can be imported by host configurations
     nixosModules.arr-stack = { config, lib, pkgs, ... }: {
       imports = [
-        # ./modules/base.nix
-        # ./modules/podman.nix
-        # ./modules/plex.nix
+        ./modules/base.nix
+        ./modules/podman.nix
+        ./modules/plex.nix
         # ./modules/sonarr.nix
         # ./modules/radarr.nix
         # ./modules/prowlarr.nix
