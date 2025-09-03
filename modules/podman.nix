@@ -12,7 +12,7 @@
     # Performance optimizations
     extraPackages = with pkgs; [
       # Required for podman-compose
-      python3Packages.podman-compose
+      # python3Packages.podman-compose
       
       # Networking tools
       aardvark-dns
