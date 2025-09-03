@@ -76,7 +76,7 @@
       # Disable unnecessary services for containers
       systemd-udev-trigger.enable = false;
       systemd-udevd.enable = false;
-      sys-kernel-debug.enable = false
+      sys-kernel-debug.enable = false;
     };
 
     tmpfiles = {
