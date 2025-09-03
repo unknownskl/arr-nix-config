@@ -77,6 +77,18 @@
       systemd-udev-trigger.enable = false;
       systemd-udevd.enable = false;
     };
+
+    tmpfiles = {
+        rules = [
+          "d /sys/kernel/debug 0555 root root -"
+        ];
+    }
+
+    suppressedSystemUnits = [
+      "systemd-udev-trigger.service"
+      "systemd-udevd.service"
+      "sys-kernel-debug.mount"
+    ];
   };
 
   # Performance and resource management
