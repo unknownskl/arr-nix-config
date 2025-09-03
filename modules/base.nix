@@ -83,7 +83,7 @@
         rules = [
           "d /sys/kernel/debug 0555 root root -"
         ];
-    }
+    };
   };
 
   # Performance and resource management
