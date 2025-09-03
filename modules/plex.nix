@@ -25,6 +25,10 @@
       Type = "forking";
       User = "media";
       Group = "media";
+      # Ensure PATH includes shadow utilities
+      Environment = [
+        "PATH=/run/wrappers/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
+      ];
       ExecStartPre = [
         # Pull the latest image
         "${pkgs.podman}/bin/podman pull docker.io/plexinc/pms-docker:latest"
@@ -45,7 +49,7 @@
           -e ADVERTISE_IP="http://$(hostname -I | awk '{print $1}'):32400/" \
           -v /var/lib/plex/config:/config:Z \
           -v /var/lib/plex/transcode:/transcode:Z \
-          -v /media:/data:ro,Z \
+          -v /media:/data:ro \
           --security-opt label=disable \
           --memory=1g \
           --memory-swap=2g \
